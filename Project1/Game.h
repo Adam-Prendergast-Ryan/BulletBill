@@ -31,6 +31,7 @@ private:
 	void setupFontAndText();
 	void setupSprite();
 	void moveTarget();
+	void animateTarget();
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
@@ -44,7 +45,11 @@ private:
 	sf::Vector2f m_targetVelocity; // velocity of the moving target
 
 	sf::Texture m_goombaTexture; // Texture for the enemy
-	sf::Sprite m_goomaSprite;
+	sf::Sprite m_goombaSprite;
+	int m_goombaFrame{ -1 };
+	const int GOOMBA_FRAMES = 20;
+	float m_goombaFrameCounter = 0.0f;
+	float m_goombaFrameIncrement = 0.3f;
 
 };
 

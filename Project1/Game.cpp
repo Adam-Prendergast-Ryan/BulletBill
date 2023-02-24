@@ -104,6 +104,7 @@ void Game::update(sf::Time t_deltaTime)
 		m_window.close();
 	}
 	moveTarget();
+	animateTarget();
 }
 
 /// <summary>
@@ -116,7 +117,7 @@ void Game::render()
 	m_window.draw(m_logoSprite);
 	m_window.draw(m_wall);
 	m_window.draw(m_target);
-	m_window.draw(m_goomaSprite);
+	m_window.draw(m_goombaSprite);
 	m_window.display();
 }
 
@@ -166,9 +167,11 @@ void Game::setupSprite()
 	{
 		std::cout << "Problem loading goomba texture" << std::endl;
 	}
-	m_goomaSprite.setTexture(m_goombaTexture);
-	m_goomaSprite.setPosition(m_targetLocation);
-	m_goomaSprite.setTextureRect(sf::IntRect{ 0,0,52,54 });
+	m_goombaSprite.setTexture(m_goombaTexture);
+	m_goombaSprite.setPosition(m_targetLocation);
+	m_goombaSprite.setTextureRect(sf::IntRect{ 0,0,52,54 });
+	m_goombaSprite.setScale(-1.0f, 1.0f);
+	m_goombaSprite.setOrigin(52.0f, 0.0f);
 }
 
 //Created to move the target along the screen
@@ -181,11 +184,36 @@ void Game::moveTarget()
 	if (m_targetLocation.x < LEFT_EDGE)
 	{
 		m_targetVelocity.x = SPEED;
+		m_goombaSprite.setScale(-1.0f, 1.0f);
+		m_goombaSprite.setOrigin(52.0f, 0.0f);
 	}
 	if (m_targetLocation.x > RIGHT_EDGE)
 	{
 		m_targetVelocity.x = SPEED;
+		m_goombaSprite.setScale(1.0f, 1.0f);
+		m_goombaSprite.setOrigin(0.0f, 0.0f);
 	}
 	m_targetLocation += m_targetVelocity;
 	m_target.setPosition(m_targetLocation);
+	m_goombaSprite.setPosition(m_targetLocation);
+}
+
+void Game::animateTarget()
+{
+	int frame = 0;
+	const int FRAME_WIDTH = 52;
+	const int FRAME_HEIGHT = 54;
+
+	m_goombaFrameCounter += m_goombaFrameIncrement;
+	frame = static_cast<int>(m_goombaFrameCounter);
+	if (frame >= GOOMBA_FRAMES)
+	{
+		frame = 0;
+		m_goombaFrameCounter = 0.0f;
+	}
+	if (frame != m_goombaFrame)
+	{
+		m_goombaFrame = frame;
+		m_goombaSprite.setTextureRect(sf::IntRect{ frame * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT });
+	}
 }
