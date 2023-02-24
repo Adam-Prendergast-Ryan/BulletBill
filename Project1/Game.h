@@ -25,6 +25,9 @@ private:
 
 	void processEvents();
 	void processKeys(sf::Event t_event);
+	void processMouseDown(sf::Event t_newEvent);
+	void processMouseMove();
+	void processMouseUp();
 	void update(sf::Time t_deltaTime);
 	void render();
 	
@@ -32,6 +35,7 @@ private:
 	void setupSprite();
 	void moveTarget();
 	void animateTarget();
+	void setAimLine();
 
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
@@ -53,6 +57,13 @@ private:
 	float m_goombaFrameCounter = 0.0f;
 	float m_goombaFrameIncrement = 0.3f;
 	bool m_graphics{ false }; // Are we in graphics mode
+
+	sf::RectangleShape m_cannon; // Cannon to fire at target
+	sf::Vector2f m_mouseEnd;
+	sf::Vector2f m_cannonEnd{ 100.0f, 550.0f };
+
+	sf::VertexArray m_aimLine{ sf::Lines }; // Line to show tragectory of projectile
+	bool m_aiming{ false }; //To show if we are aiming or not
 
 };
 

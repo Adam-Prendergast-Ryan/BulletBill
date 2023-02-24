@@ -77,6 +77,10 @@ void Game::processEvents()
 		{
 			processKeys(newEvent);
 		}
+		if (sf::Event::MouseButtonPressed == newEvent.type)
+		{
+			processMouseDown(newEvent);
+		}
 	}
 }
 
@@ -95,6 +99,27 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_graphics = !m_graphics; //graphics mode
 	}
+}
+
+void Game::processMouseDown(sf::Event t_newEvent)
+{
+	if (!m_aiming)
+	{
+		m_mouseEnd.x = static_cast<float>(t_newEvent.mouseButton.x);
+		m_mouseEnd.y = static_cast<float>(t_newEvent.mouseButton.y);
+		m_aiming = true;
+		setAimLine();
+	}
+}
+
+void Game::processMouseMove()
+{
+
+}
+
+void Game::processMouseUp()
+{
+
 }
 
 /// <summary>
@@ -127,6 +152,11 @@ void Game::render()
 	{
 		m_window.draw(m_wall);
 		m_window.draw(m_target);
+		m_window.draw(m_cannon);
+		if (m_aiming)
+		{
+			m_window.draw(m_aimLine);
+		}
 	}
 	m_window.display();
 }
@@ -164,6 +194,12 @@ void Game::setupSprite()
 	m_target.setSize(sf::Vector2f{ 55.0f, 55.0f });
 	m_targetLocation = sf::Vector2f(420.0f, 545.0f);
 	m_target.setPosition(m_targetLocation);
+
+	m_cannon.setFillColor(sf::Color::Black);
+	m_cannon.setSize(sf::Vector2f{ 20.0f,70.0f });
+	m_cannon.setPosition(100.0f, 550.0f);
+	m_cannon.setOrigin(10.0f, 35.0f);
+	m_cannon.setRotation(45.0f);
 
 	if (!m_backgroundTexture.loadFromFile("ASSETS\\IMAGES\\background.jpg"))
 	{
@@ -235,4 +271,15 @@ void Game::animateTarget()
 		m_goombaFrame = frame;
 		m_goombaSprite.setTextureRect(sf::IntRect{ frame * FRAME_WIDTH, 0, FRAME_WIDTH, FRAME_HEIGHT });
 	}
+}
+
+void Game::setAimLine()
+{
+	sf::Vertex point;
+	point.color = sf::Color::Black;
+	m_aimLine.clear();
+	point.position = m_mouseEnd;
+	m_aimLine.append(point);
+	point.position = m_cannonEnd;
+	m_aimLine.append(point);
 }
