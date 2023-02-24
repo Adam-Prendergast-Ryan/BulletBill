@@ -38,6 +38,8 @@ private:
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
 	bool m_exitGame; // control exiting game
 	sf::RectangleShape m_wall; // box for the wall
+	sf::RectangleShape m_target; // box of the target to be fired at
+	sf::Vector2f m_targetLocation; // area of the target
 
 };
 
