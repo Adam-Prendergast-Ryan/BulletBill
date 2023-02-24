@@ -91,6 +91,10 @@ void Game::processKeys(sf::Event t_event)
 	{
 		m_exitGame = true;
 	}
+	if (sf::Keyboard::F1 == t_event.key.code)
+	{
+		m_graphics = !m_graphics; //graphics mode
+	}
 }
 
 /// <summary>
@@ -113,11 +117,17 @@ void Game::update(sf::Time t_deltaTime)
 void Game::render()
 {
 	m_window.clear(sf::Color::White);
-	m_window.draw(m_welcomeMessage);
-	m_window.draw(m_logoSprite);
-	m_window.draw(m_wall);
-	m_window.draw(m_target);
-	m_window.draw(m_goombaSprite);
+	if (m_graphics == true)
+	{
+		m_window.draw(m_backgroundSprite);
+		m_window.draw(m_wallSprite);
+		m_window.draw(m_goombaSprite);
+	}
+	else
+	{
+		m_window.draw(m_wall);
+		m_window.draw(m_target);
+	}
 	m_window.display();
 }
 
@@ -155,13 +165,13 @@ void Game::setupSprite()
 	m_targetLocation = sf::Vector2f(420.0f, 545.0f);
 	m_target.setPosition(m_targetLocation);
 
-	if (!m_logoTexture.loadFromFile("ASSETS\\IMAGES\\SFML-LOGO.png"))
+	if (!m_backgroundTexture.loadFromFile("ASSETS\\IMAGES\\background.jpg"))
 	{
 		// simple error message if previous call fails
-		std::cout << "problem loading logo" << std::endl;
+		std::cout << "problem loading background" << std::endl;
 	}
-	m_logoSprite.setTexture(m_logoTexture);
-	m_logoSprite.setPosition(300.0f, 180.0f);
+	m_backgroundSprite.setTexture(m_backgroundTexture);
+	m_backgroundSprite.setPosition(0.0f, 0.0f);
 
 	if (!m_goombaTexture.loadFromFile("ASSETS\\IMAGES\\gumba2.png"))
 	{
@@ -172,6 +182,15 @@ void Game::setupSprite()
 	m_goombaSprite.setTextureRect(sf::IntRect{ 0,0,52,54 });
 	m_goombaSprite.setScale(-1.0f, 1.0f);
 	m_goombaSprite.setOrigin(52.0f, 0.0f);
+
+	if (!m_wallTexture.loadFromFile("ASSETS\\IMAGES\\wall.jpg"))
+	{
+		std::cout << "Problem loading wall texture" << std::endl;
+	}
+	m_wallSprite.setTexture(m_wallTexture);
+	m_wallSprite.setPosition(400.0f, 500.0f);
+	m_wallTexture.setRepeated(true);
+	m_wallSprite.setTextureRect(sf::IntRect{ 0,0,32,100 });
 }
 
 //Created to move the target along the screen

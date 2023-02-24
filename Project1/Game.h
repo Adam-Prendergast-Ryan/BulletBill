@@ -36,8 +36,10 @@ private:
 	sf::RenderWindow m_window; // main SFML window
 	sf::Font m_ArialBlackfont; // font used by message
 	sf::Text m_welcomeMessage; // text used for message on screen
-	sf::Texture m_logoTexture; // texture used for sfml logo
-	sf::Sprite m_logoSprite; // sprite used for sfml logo
+	sf::Texture m_backgroundTexture; // Texture for the background of the game
+	sf::Sprite m_backgroundSprite; // Sprite for the background of the game
+	sf::Texture m_wallTexture; // Texture for the wall of the game
+	sf::Sprite m_wallSprite; // Sprite for the wall of the game
 	bool m_exitGame; // control exiting game
 	sf::RectangleShape m_wall; // box for the wall
 	sf::RectangleShape m_target; // box of the target to be fired at
@@ -50,6 +52,7 @@ private:
 	const int GOOMBA_FRAMES = 20;
 	float m_goombaFrameCounter = 0.0f;
 	float m_goombaFrameIncrement = 0.3f;
+	bool m_graphics{ false }; // Are we in graphics mode
 
 };
 
