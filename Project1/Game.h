@@ -37,6 +37,7 @@ private:
 	sf::Texture m_logoTexture; // texture used for sfml logo
 	sf::Sprite m_logoSprite; // sprite used for sfml logo
 	bool m_exitGame; // control exiting game
+	sf::RectangleShape m_wall; // box for the wall
 
 };
 
