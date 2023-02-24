@@ -1,0 +1,26 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+  <TemplateData>
+    <Name>SFML Template</Name>
+    <Description>Empty Game &lt;esc&gt; to win</Description>
+    <ProjectType>VC</ProjectType>
+    <ProjectSubType>
+    </ProjectSubType>
+    <SortOrder>1000</SortOrder>
+    <CreateNewFolder>true</CreateNewFolder>
+    <DefaultName>SFML Template</DefaultName>
+    <ProvideDefaultName>true</ProvideDefaultName>
+    <LocationField>Enabled</LocationField>
+    <EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+    <Icon>__TemplateIcon.jpg</Icon>
+  </TemplateData>
+  <TemplateContent>
+    <Project TargetFileName="SFML Template 222.vcxproj" File="SFML Template 222.vcxproj" ReplaceParameters="true">
+      <ProjectItem ReplaceParameters="false" TargetFileName="$projectname$.vcxproj.filters">SFML Template 222.vcxproj.filters</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Game.cpp">Game.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="main.cpp">main.cpp</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="Game.h">Game.h</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="ariblk.ttf">ASSETS\FONTS\ariblk.ttf</ProjectItem>
+      <ProjectItem ReplaceParameters="false" TargetFileName="SFML-LOGO.png">ASSETS\IMAGES\SFML-LOGO.png</ProjectItem>
+    </Project>
+  </TemplateContent>
+</VSTemplate>
