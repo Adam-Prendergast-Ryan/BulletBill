@@ -116,6 +116,7 @@ void Game::render()
 	m_window.draw(m_logoSprite);
 	m_window.draw(m_wall);
 	m_window.draw(m_target);
+	m_window.draw(m_goomaSprite);
 	m_window.display();
 }
 
@@ -160,6 +161,14 @@ void Game::setupSprite()
 	}
 	m_logoSprite.setTexture(m_logoTexture);
 	m_logoSprite.setPosition(300.0f, 180.0f);
+
+	if (!m_goombaTexture.loadFromFile("ASSETS\\IMAGES\\gumba2.png"))
+	{
+		std::cout << "Problem loading goomba texture" << std::endl;
+	}
+	m_goomaSprite.setTexture(m_goombaTexture);
+	m_goomaSprite.setPosition(m_targetLocation);
+	m_goomaSprite.setTextureRect(sf::IntRect{ 0,0,52,54 });
 }
 
 //Created to move the target along the screen

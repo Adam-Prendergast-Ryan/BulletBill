@@ -43,6 +43,9 @@ private:
 	sf::Vector2f m_targetLocation; // area of the target
 	sf::Vector2f m_targetVelocity; // velocity of the moving target
 
+	sf::Texture m_goombaTexture; // Texture for the enemy
+	sf::Sprite m_goomaSprite;
+
 };
 
 #endif // !GAME_HPP
